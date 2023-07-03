@@ -4,7 +4,7 @@ const { readData, createData } = require('../controllers/data.controller')
 const router = express.Router()
 
 router.get('/test', (req, res) => {
-    res.send('HELLO GILANG')
+    res.send('HELLO WORLD GILANG')
 })
 router.get('/data', readData)
 router.post('/data', createData)
