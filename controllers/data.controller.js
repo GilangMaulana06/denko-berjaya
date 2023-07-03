@@ -1,8 +1,8 @@
 const db = require('../models')
 const data = db.data
 
-const readData = (req, res) => {
-    data.find()
+const readData = async (req, res) => {
+    await data.find()
         .then(data =>  res.json({message: "Hello, World!"}))
         .catch(err => res.status(500).send({ message: err.message }))
 }
