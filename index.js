@@ -2,24 +2,25 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const router = express.Router()
+const db = require('./models')
+const routes = require('./routes/data.routes');
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
-router.get('/data', (req, res) => {
-    const data = {
-        nama: 'gilang',
-        umur: '21',
-        pekerjaan: 'Programmer'
-    }
-    res.json(data)
-})
+const mongooseConfig = {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+}
 
-router.get('/home', (req, res) => {
-    res.send('HELLO WORLD')
-})
+db.mongoose.connect(db.URL, mongooseConfig)
+    .then(() => console.log('database connected'))
+    .catch(err => {
+        console.log('gagal connect')
+        process.exit();
+    })
 
-app.use('/', router)
+app.use('/', routes)
 
 app.listen(3000, () => {
     console.log('listening on port:3000');
