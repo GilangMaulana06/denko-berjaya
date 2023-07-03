@@ -1,5 +1,6 @@
 require('dotenv').config()
 const express = require('express');
+const serverless = require('serverless-http')
 const app = express();
 const bodyParser = require('body-parser');
 const router = express.Router()
@@ -27,3 +28,5 @@ const PORT = process.env.PORT || 80
 app.listen(PORT, () => {
     console.log('listening on port: ', PORT);
 });
+
+module.exports.handler = serverless(app)
