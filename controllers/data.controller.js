@@ -3,7 +3,7 @@ const data = db.data
 
 const readData = (req, res) => {
     data.find()
-        .then(data => res.send(data))
+        .then(data =>  res.send('BERHASIL GILANG'))
         .catch(err => res.status(500).send({ message: err.message }))
 }
 
