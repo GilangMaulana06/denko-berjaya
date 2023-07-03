@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
@@ -22,6 +23,7 @@ db.mongoose.connect(db.URL, mongooseConfig)
 
 app.use('/', routes)
 
-app.listen(3000, () => {
-    console.log('listening on port:3000');
+const PORT = process.env.PORT || 80
+app.listen(PORT, () => {
+    console.log('listening on port: ', PORT);
 });
