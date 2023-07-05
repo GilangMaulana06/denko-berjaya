@@ -10,7 +10,7 @@ const cors = require('cors')
 const { readData } = require('./controllers/data.controller')
 
 const corsOptions = {
-    origin: '*',
+    origin: ["https://test-delta-flax.vercel.app"],
     method: ["POST", "GET"],
     credentials: true
 }
