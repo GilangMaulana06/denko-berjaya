@@ -23,6 +23,9 @@ db.mongoose.connect(db.URL, mongooseConfig)
         process.exit();
     })
 
+app.get('/test', (req, res) => {
+    res.json({message: 'Test gilang'})
+})
 app.get('/home', readData)
 
 const PORT = process.env.PORT || 80
