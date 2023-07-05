@@ -6,7 +6,15 @@ const bodyParser = require('body-parser');
 const router = express.Router()
 const db = require('./models')
 const routes = require('./routes/data.routes');
+const cors = require('cors')
 const { readData } = require('./controllers/data.controller')
+
+const corsOptions = {
+    origin: '*'
+}
+
+app.use(cors(corsOptions))
+app.use(express.json())
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
