@@ -10,7 +10,8 @@ const cors = require('cors')
 const { readData } = require('./controllers/data.controller')
 
 const corsOptions = {
-    origin: '*'
+    method: ["POST", "GET"],
+    credentials: true
 }
 
 app.use(cors(corsOptions))
@@ -32,7 +33,7 @@ db.mongoose.connect(db.URL, mongooseConfig)
     })
 
 app.get('/test', (req, res) => {
-    res.json({message: 'Test gilang'})
+    res.json({ message: 'Test gilang' })
 })
 app.get('/home', readData)
 
