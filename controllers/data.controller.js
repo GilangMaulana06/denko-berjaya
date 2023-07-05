@@ -3,7 +3,7 @@ const data = db.data
 
 const readData = async (req, res) => {
     await data.find()
-        .then(data =>  res.json({message: "Hello, World!"}))
+        .then(data =>  res.json(data))
         .catch(err => res.status(500).send({ message: err.message }))
 }
 

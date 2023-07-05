@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const router = express.Router()
 const db = require('./models')
 const routes = require('./routes/data.routes');
+const { readData } = require('./controllers/data.controller')
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -22,7 +23,7 @@ db.mongoose.connect(db.URL, mongooseConfig)
         process.exit();
     })
 
-app.use('/', routes)
+app.get('/home', readData)
 
 const PORT = process.env.PORT || 80
 app.listen(PORT, () => {
