@@ -10,6 +10,7 @@ const cors = require('cors')
 const { readData } = require('./controllers/data.controller')
 
 const corsOptions = {
+    origin: '*',
     method: ["POST", "GET"],
     credentials: true
 }
