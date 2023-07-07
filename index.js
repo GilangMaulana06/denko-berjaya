@@ -7,7 +7,7 @@ const router = express.Router()
 const db = require('./models')
 const routes = require('./routes/data.routes');
 const cors = require('cors')
-const { readData } = require('./controllers/data.controller')
+const { readData, createData } = require('./controllers/data.controller')
 
 const corsOptions = {
     origin: ["https://test-delta-flax.vercel.app/"],
@@ -36,7 +36,7 @@ db.mongoose.connect(db.URL, mongooseConfig)
 app.get('/test', (req, res) => {
     res.json({ message: 'Test gilang' })
 })
-app.get('/home', readData)
+app.post('/home', createData)
 
 const PORT = process.env.PORT || 80
 app.listen(PORT, () => {
