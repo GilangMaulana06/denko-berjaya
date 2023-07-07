@@ -9,11 +9,19 @@ const readData = (req, res) => {
 
 const createData = (req, res) => {
     data.create(req.body)
-        .then(() => res.send({ message: 'Data berhasil disimpan' }))
+        .then((response) => res.json(response).status(200))
+        .catch(err => res.status(500).send({ message: err.message }))
+}
+
+const deleteData = (req, res) => {
+    console.log(req.params)
+    data.findOneAndDelete(({_id: req.params.id}))
+        .then((response) => res.json({message: 'Delete Berhasil'}).status(200))
         .catch(err => res.status(500).send({ message: err.message }))
 }
 
 module.exports = {
     readData,
-    createData
+    createData,
+    deleteData
 }
