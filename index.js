@@ -36,7 +36,7 @@ db.mongoose.connect(db.URL, mongooseConfig)
 app.get('/test', (req, res) => {
     res.json({ message: 'Test gilang' })
 })
-app.post('/home', readData)
+app.get('/home', readData)
 
 const PORT = process.env.PORT || 80
 app.listen(PORT, () => {
