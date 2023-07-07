@@ -1,18 +1,15 @@
 require('dotenv').config()
 const express = require('express');
-const serverless = require('serverless-http')
+const serverless = require('serverless-http');
 const app = express();
 const bodyParser = require('body-parser');
 const router = express.Router()
 const db = require('./models')
 const routes = require('./routes/data.routes');
 const cors = require('cors')
-const { readData, createData } = require('./controllers/data.controller')
 
 const corsOptions = {
-    origin: ["https://test-delta-flax.vercel.app/"],
-    method: ["POST", "GET"],
-    credentials: true
+    origin: '*',
 }
 
 app.use(cors(corsOptions))
@@ -33,14 +30,11 @@ db.mongoose.connect(db.URL, mongooseConfig)
         process.exit();
     })
 
-app.get('/test', (req, res) => {
-    res.json({ message: 'Test gilang' })
-})
-app.get('/home', readData)
+app.get('/api', routes)
 
 const PORT = process.env.PORT || 80
 app.listen(PORT, () => {
     console.log('listening on port: ', PORT);
 });
 
-// module.exports.handler = serverless(app)
+module.exports.handler = serverless(app);
