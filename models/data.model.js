@@ -7,9 +7,6 @@ module.exports = mongoose => {
             type: String
         }, {
         timestamps: true,
-        capped: { size: 1024 },
-        bufferCommands: false,
-        autoCreate: false
     }
     )
 
