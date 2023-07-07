@@ -4,7 +4,10 @@ module.exports = mongoose => {
         {
             nama_item: String,
             ukuran: String,
-            type: String
+            type: String,
+            modal: String,
+            harga_ecer: String,
+            harga_grosir: String
         }, {
         timestamps: true,
     }
