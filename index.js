@@ -30,7 +30,7 @@ db.mongoose.connect(db.URL, mongooseConfig)
         process.exit();
     })
 
-app.get('/api', routes)
+app.use('/api', routes)
 
 const PORT = process.env.PORT || 80
 app.listen(PORT, () => {
