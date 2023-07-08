@@ -17,17 +17,18 @@ const createData = (req, res) => {
 
 const updateData = (req, res) => {
     console.log('UPDATE')
-    data.findOneAndUpdate(({ _id: req.params.id }, {
+    data.findOneAndUpdate({ _id: req.params.id }, {
         $set: {
             nama_item: req.body.nama_item,
-            ukuran: req.body.ukuran,
             type: req.body.type,
+            brand: req.body.brand,
+            ukuran: req.body.ukuran,
             modal: req.body.modal,
             harga_ecer: req.body.harga_ecer,
             harga_grosir: req.body.harga_grosir
         }
-    }))
-        .then(() => res.json({ message: 'Update Berhasil' }).status(200))
+    }, { returnOriginal: false })
+        .then((response) => res.json(response).status(200))
         .catch(err => res.status(400).send({ message: err.message }))
 }
 
