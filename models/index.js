@@ -4,5 +4,8 @@ const mongoose = require('mongoose')
 module.exports = {
     mongoose,
     URL: dbConfig.url,
-    data: require('./data.model')(mongoose)
+    data: {
+        barang: require('./data.model')(mongoose),
+        user: require('./user.model')(mongoose),
+    }
 }

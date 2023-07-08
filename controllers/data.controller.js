@@ -1,5 +1,5 @@
 const db = require('../models')
-const data = db.data
+const data = db.data.barang
 
 const readData = (req, res) => {
         console.log('READ')
