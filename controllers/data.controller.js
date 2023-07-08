@@ -2,26 +2,45 @@ const db = require('../models')
 const data = db.data
 
 const readData = (req, res) => {
+    console.log('READ')
     data.find()
-        .then(data =>  res.json(data))
-        .catch(err => res.status(500).send({ message: err.message }))
+        .then(data => res.json(data))
+        .catch(err => res.status(400).send({ message: err.message }))
 }
 
 const createData = (req, res) => {
+    console.log('CREATE')
     data.create(req.body)
         .then((response) => res.json(response).status(200))
-        .catch(err => res.status(500).send({ message: err.message }))
+        .catch(err => res.status(400).send({ message: err.message }))
+}
+
+const updateData = (req, res) => {
+    console.log('UPDATE')
+    data.findOneAndUpdate(({ _id: req.params.id }, {
+        $set: {
+            nama_item: req.body.nama_item,
+            ukuran: req.body.ukuran,
+            type: req.body.type,
+            modal: req.body.modal,
+            harga_ecer: req.body.harga_ecer,
+            harga_grosir: req.body.harga_grosir
+        }
+    }))
+        .then(() => res.json({ message: 'Update Berhasil' }).status(200))
+        .catch(err => res.status(400).send({ message: err.message }))
 }
 
 const deleteData = (req, res) => {
-    console.log(req.params)
-    data.findOneAndDelete(({_id: req.params.id}))
-        .then((response) => res.json({message: 'Delete Berhasil'}).status(200))
-        .catch(err => res.status(500).send({ message: err.message }))
+    console.log('DELETE')
+    data.findOneAndDelete(({ _id: req.params.id }))
+        .then(() => res.json({ message: 'Delete Berhasil' }).status(200))
+        .catch(err => res.status(400).send({ message: err.message }))
 }
 
 module.exports = {
     readData,
     createData,
+    updateData,
     deleteData
 }
