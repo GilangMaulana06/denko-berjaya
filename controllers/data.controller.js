@@ -8,6 +8,13 @@ const readData = (req, res) => {
         .catch(err => res.status(400).send({ message: err.message }))
 }
 
+const readDataById = (req, res) => {
+    console.log('READ BY ID')
+    data.find({type : req.params.id})
+        .then(data => res.json(data))
+        .catch(err => res.status(400).send({ message: err.message }))
+}
+
 const createData = (req, res) => {
     console.log('CREATE')
     data.create(req.body)
@@ -41,6 +48,7 @@ const deleteData = (req, res) => {
 
 module.exports = {
     readData,
+    readDataById,
     createData,
     updateData,
     deleteData
