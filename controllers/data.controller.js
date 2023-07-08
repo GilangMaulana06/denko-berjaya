@@ -2,17 +2,19 @@ const db = require('../models')
 const data = db.data
 
 const readData = (req, res) => {
-    console.log('READ')
-    data.find()
-        .then(data => res.json(data))
-        .catch(err => res.status(400).send({ message: err.message }))
-}
-
-const readDataById = (req, res) => {
-    console.log('READ BY ID')
-    data.find({type : req.params.id})
-        .then(data => res.json(data))
-        .catch(err => res.status(400).send({ message: err.message }))
+        console.log('READ')
+        const regexNama = new RegExp(req.query.nama, 'i')
+        const regexUkuran = new RegExp(req.query.ukuran, 'i')
+        const regexType = new RegExp(req.query.type, 'i')
+        const regexBrand = new RegExp(req.query.brand, 'i')
+        data.find({
+            nama_item: regexNama,
+            ukuran: regexUkuran,
+            type: regexType,
+            brand: regexBrand
+        }).sort({nama_item : 1})
+            .then(data => res.json(data))
+            .catch(err => res.status(400).send({ message: err.message }))
 }
 
 const createData = (req, res) => {
@@ -48,7 +50,6 @@ const deleteData = (req, res) => {
 
 module.exports = {
     readData,
-    readDataById,
     createData,
     updateData,
     deleteData
