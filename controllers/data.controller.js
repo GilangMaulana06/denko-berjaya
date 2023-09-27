@@ -1,20 +1,48 @@
 const db = require('../models')
 const data = db.data.barang
 
-const readData = (req, res) => {
-        console.log('READ')
-        const regexNama = new RegExp(req.query.nama, 'i')
-        const regexUkuran = new RegExp(req.query.ukuran, 'i')
-        const regexType = new RegExp(req.query.type, 'i')
-        const regexBrand = new RegExp(req.query.brand, 'i')
-        data.find({
+const readData = async (req, res) => {
+    console.log('READ')
+    const regexNama = new RegExp(req.query.nama, 'i')
+    const regexUkuran = new RegExp(req.query.ukuran, 'i')
+    const regexType = new RegExp(req.query.type, 'i')
+    const regexBrand = new RegExp(req.query.brand, 'i')
+
+    const limitData = req.query.limit ? req.query.limit : ''
+    const offsetData = req.query.offset ? req.query.offset : ''
+
+    const { nama, ukuran, type, brand } = req.query
+
+    try {
+        const response = await data.find({
             nama_item: regexNama,
             ukuran: regexUkuran,
             type: regexType,
             brand: regexBrand
-        }).sort({nama_item : 1})
-            .then(data => res.json(data))
-            .catch(err => res.status(400).send({ message: err.message }))
+        })
+            .limit(limitData)
+            .skip(offsetData)
+            .sort({ nama_item: 1 })
+
+        let totalData
+
+        if (nama || ukuran || type || brand) {
+            const total = await data.find({
+                nama_item: regexNama,
+                ukuran: regexUkuran,
+                type: regexType,
+                brand: regexBrand
+            }).count()
+            totalData = total
+        } else {
+            const total = await data.count()
+            totalData = total
+        }
+
+        res.status(200).json({ data: response, total_data: totalData })
+    } catch (err) {
+        res.status(400).send({ message: err.message })
+    }
 }
 
 const createData = (req, res) => {
