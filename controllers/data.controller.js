@@ -27,13 +27,13 @@ const readData = async (req, res) => {
         let totalData
 
         if (nama || ukuran || type || brand) {
-            const total = await data.find({
-                nama_item: regexNama,
-                ukuran: regexUkuran,
-                type: regexType,
-                brand: regexBrand
-            }).count()
-            totalData = total
+            // const total = await data.find({
+            //     nama_item: regexNama,
+            //     ukuran: regexUkuran,
+            //     type: regexType,
+            //     brand: regexBrand
+            // }).count()
+            // totalData = total
         } else {
             const total = await data.count()
             totalData = total
