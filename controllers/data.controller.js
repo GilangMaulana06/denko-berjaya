@@ -10,7 +10,7 @@ const readData = async (req, res) => {
     const regexBrand = new RegExp(brand, 'i')
     let regexUkuran
 
-    if(ukuran.includes('*')){
+    if(ukuran?.includes('*')){
         regexUkuran = new RegExp(ukuran.replace('*', `\\*`), 'i')
     } else {
         regexUkuran = new RegExp(ukuran, 'i')
