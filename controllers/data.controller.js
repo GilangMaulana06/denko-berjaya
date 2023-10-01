@@ -3,15 +3,21 @@ const data = db.data.barang
 
 const readData = async (req, res) => {
     console.log('READ')
-    const regexNama = new RegExp(req.query.nama, 'i')
-    const regexUkuran = new RegExp(req.query.ukuran, 'i')
-    const regexType = new RegExp(req.query.type, 'i')
-    const regexBrand = new RegExp(req.query.brand, 'i')
+    const { nama, ukuran, type, brand } = req.query
+    
+    const regexNama = new RegExp(nama, 'i')
+    const regexType = new RegExp(type, 'i')
+    const regexBrand = new RegExp(brand, 'i')
+    let regexUkuran
+
+    if(ukuran.includes('*')){
+        regexUkuran = new RegExp(ukuran.replace('*', `\\*`), 'i')
+    } else {
+        regexUkuran = new RegExp(ukuran, 'i')
+    }
 
     const limitData = req.query.limit ? req.query.limit : ''
     const offsetData = req.query.offset ? req.query.offset : ''
-
-    const { nama, ukuran, type, brand } = req.query
 
     try {
         const response = await data.find({

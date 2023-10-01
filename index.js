@@ -26,6 +26,7 @@ const mongooseConfig = {
 db.mongoose.connect(db.URL, mongooseConfig)
     .then(() => console.log('database connected'))
     .catch(err => {
+        console.log(err)
         console.log('gagal connect')
         process.exit();
     })
