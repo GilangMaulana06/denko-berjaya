@@ -7,5 +7,6 @@ module.exports = {
     data: {
         barang: require('./data.model')(mongoose),
         user: require('./user.model')(mongoose),
+        sumber : require('./sumber.barang')(mongoose),
     }
 }
