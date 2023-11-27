@@ -52,7 +52,7 @@ const readData = async (req, res) => {
             brand: regexBrand,
             sumber_barang: regexSumberBarang
         })
-            .sort({ nama_item: 1 })
+            .sort({ nama_item: 1, brand: 1 })
 
         res.status(200).json({ data: response })
     } catch (err) {
