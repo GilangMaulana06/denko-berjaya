@@ -31,7 +31,7 @@ db.mongoose.connect(db.URL, mongooseConfig)
         process.exit();
     })
 
-app.use('/api', routes)
+app.use('/api/padang', routes)
 
 const PORT = process.env.PORT || 80
 app.listen(PORT, () => {
