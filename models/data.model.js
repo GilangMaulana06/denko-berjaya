@@ -3,13 +3,14 @@ module.exports = mongoose => {
     const schema = mongoose.Schema(
         {
             nama_item: String,
-            type: String,
+            stok: Number,
+            // type: String,
             brand: String,
             ukuran: String,
             modal: String,
             harga_ecer: String,
-            harga_grosir: String,
-            sumber_barang : String,
+            // harga_grosir: String,
+            // sumber_barang : String,
         }, {
         timestamps: true,
     }

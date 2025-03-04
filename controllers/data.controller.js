@@ -30,6 +30,7 @@ const createSumberData = async (value) => {
 const readData = async (req, res) => {
     console.log('READ')
     const { nama, ukuran, type, brand, sumber_barang } = req.query
+    console.log(nama)
 
     const regexNama = new RegExp(nama, 'i')
     const regexType = new RegExp(type, 'i')
@@ -47,10 +48,10 @@ const readData = async (req, res) => {
 
         const response = await data.find({
             nama_item: regexNama,
-            ukuran: regexUkuran,
-            type: regexType,
-            brand: regexBrand,
-            sumber_barang: regexSumberBarang
+            // ukuran: regexUkuran,
+            // type: regexType,
+            // brand: regexBrand,
+            // sumber_barang: regexSumberBarang
         })
             .sort({ nama_item: 1, brand: 1 })
 
@@ -64,7 +65,7 @@ const createData = (req, res) => {
     console.log('CREATE')
     data.create(req.body)
         .then((response) => {
-            createSumberData(req.body.sumber_barang)
+            //         createSumberData(req.body.sumber_barang)
             res.json(response).status(200)
         })
         .catch(err => res.status(400).send({ message: err.message }))
@@ -75,18 +76,23 @@ const updateData = (req, res) => {
     data.findOneAndUpdate({ _id: req.params.id }, {
         $set: {
             nama_item: req.body.nama_item,
-            type: req.body.type,
-            brand: req.body.brand,
-            ukuran: req.body.ukuran,
-            modal: req.body.modal,
-            harga_ecer: req.body.harga_ecer,
-            harga_grosir: req.body.harga_grosir,
-            sumber_barang: req.body.sumber_barang,
+            stok: req.body.stok,
+            // type: req.body.type,
+            // brand: req.body.brand,
+            // ukuran: req.body.ukuran,
+            // modal: req.body.modal,
+            // harga_ecer: req.body.harga_ecer,
+            // harga_grosir: req.body.harga_grosir,
+            // sumber_barang: req.body.sumber_barang,
         }
     }, { returnOriginal: false })
         .then((response) => {
-            createSumberData(req.body.sumber_barang)
-            res.json(response).status(200)
+            // createSumberData(req.body.sumber_barang)
+            if(response === null){
+                res.status(404).send('Data tidak ditemukan')
+            } else {
+                res.json(response).status(200)
+            }
         })
         .catch(err => res.status(400).send({ message: err.message }))
 }
