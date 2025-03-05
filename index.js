@@ -27,7 +27,7 @@ db.mongoose.connect(db.URL, mongooseConfig)
     .then(() => console.log('database connected'))
     .catch(err => {
         console.log(err)
-        console.log('gagal connect')
+        console.log('gagal connectt')
         process.exit();
     })
 
