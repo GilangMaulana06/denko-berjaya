@@ -19,7 +19,7 @@ const createSumberData = async (value) => {
             nama_toko: value,
         })
         if (response.length === 0) {
-            console.log('CREATE SUMBER TOKO')
+            console.log('CREATE SUMBER TOKOO')
             dataSumber.create({
                 nama_toko: value
             })
