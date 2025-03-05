@@ -48,10 +48,10 @@ const readData = async (req, res) => {
 
         const response = await data.find({
             nama_item: regexNama,
-            // ukuran: regexUkuran,
-            // type: regexType,
-            // brand: regexBrand,
-            // sumber_barang: regexSumberBarang
+            ukuran: regexUkuran,
+            type: regexType,
+            brand: regexBrand,
+            sumber_barang: regexSumberBarang
         })
             .sort({ nama_item: 1, brand: 1 })
 
@@ -77,13 +77,13 @@ const updateData = (req, res) => {
         $set: {
             nama_item: req.body.nama_item,
             stok: req.body.stok,
-            // type: req.body.type,
-            // brand: req.body.brand,
-            // ukuran: req.body.ukuran,
-            // modal: req.body.modal,
-            // harga_ecer: req.body.harga_ecer,
-            // harga_grosir: req.body.harga_grosir,
-            // sumber_barang: req.body.sumber_barang,
+            type: req.body.type,
+            brand: req.body.brand,
+            ukuran: req.body.ukuran,
+            modal: req.body.modal,
+            harga_ecer: req.body.harga_ecer,
+            harga_grosir: req.body.harga_grosir,
+            sumber_barang: req.body.sumber_barang,
         }
     }, { returnOriginal: false })
         .then((response) => {
