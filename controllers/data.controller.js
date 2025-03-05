@@ -65,7 +65,7 @@ const createData = (req, res) => {
     console.log('CREATE')
     data.create(req.body)
         .then((response) => {
-            //         createSumberData(req.body.sumber_barang)
+            createSumberData(req.body.sumber_barang)
             res.json(response).status(200)
         })
         .catch(err => res.status(400).send({ message: err.message }))
@@ -87,8 +87,8 @@ const updateData = (req, res) => {
         }
     }, { returnOriginal: false })
         .then((response) => {
-            // createSumberData(req.body.sumber_barang)
-            if(response === null){
+            createSumberData(req.body.sumber_barang)
+            if (response === null) {
                 res.status(404).send('Data tidak ditemukan')
             } else {
                 res.json(response).status(200)
